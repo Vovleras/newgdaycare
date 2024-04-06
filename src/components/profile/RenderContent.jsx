@@ -11,7 +11,7 @@ import {
 */
 const RenderContent = ({
     data_content,
-}) => {
+}) =>  {
 
     //hooks
     const [ data , setData ] = React.useState({

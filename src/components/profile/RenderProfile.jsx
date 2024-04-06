@@ -10,13 +10,32 @@ const RenderProfile = ({
     cursosAsignados,
 }) => {
 
+
     const [data, setData] = React.useState({
         sedePerteneciente: '',
         img_profile:  '',
         nombreUsuario: '',
         cursosAsignados: '',
         aprovadeUser: ['No Have Pickavd']
+        
     });
+    //console.log ([data, setData])
+    let img_Course = '';
+    const imgIndex = {
+        '1': 'Jellyfish',
+        '2': 'Dandy',
+        '3': 'Lobster',
+        '4': 'Safari',
+        '5': 'Jungle',
+        '6': 'Forest',
+        '7': 'After',  
+    }
+    for (let element in imgIndex) {
+            
+        if (!data.cursosAsignados.includes(imgIndex[element])) continue;
+        
+        img_Course = element
+      }
 
     React.useEffect(() => {
         setData({
@@ -32,11 +51,11 @@ const RenderProfile = ({
       nombreUsuario, 
       cursosAsignados
     ]);
-
+    
     React.useEffect(() => {
         
         const data = window.sessionStorage.getItem('data_stundent');
-        
+    
         if (window.sessionStorage.hasOwnProperty('data_stundent')) {
             let data_ = JSON.parse(data);
             let pickavd  = ['No Have Pickavd']
@@ -78,12 +97,14 @@ const RenderProfile = ({
                                 }
                              })
                             }
+                        </div>  
+                    </div>
+                        <div className='_profile_course'>
+                            <div className='_profile_course_content'>
+                                <img src={`/assets/course/${img_Course}.png`} />  
+                            </div> 
+                            <h1>{data.sedePerteneciente +" -"+ data.cursosAsignados}</h1> 
                         </div>
-                    </div>
-                    <div className='_profile_data_'>
-                        <h1>{data.sedePerteneciente}</h1>
-                        <h1>{data.cursosAsignados}</h1>
-                    </div>
                 </section>
            </main>
            <main className='_container_profile_'>

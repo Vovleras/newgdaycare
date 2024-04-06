@@ -654,3 +654,34 @@ div.MuiTypography-root.MuiTypography-h1 {
     cursor: pointer;
     z-index: 99999;
 }
+
+._profile_course{
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2em;
+    margin-right: 2em;
+    width: 16%;
+    height: 15%;
+    border-radius: 8px;
+    background-color: var(--color-bg-button-primary-hover);
+
+}
+._profile_course_content{
+    display: flex;
+    justify-content: center;
+    height: 7em;
+    width: 100%;
+    padding-top: 10%;
+}
+._profile_course_content > img{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: scale-down;
+}
+._profile_course h1{
+    color: var(--color-white);
+    font-family: var(--text-general-primary);
+    text-align: center;
+}
+
+

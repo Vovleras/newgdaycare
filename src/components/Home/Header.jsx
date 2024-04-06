@@ -1,5 +1,5 @@
 //import libs
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
@@ -37,9 +37,9 @@ const Header = () => {
             setSearch(false);
             return;
         }
-
         setSearch(true);
         setData(find); 
+        
     }
 
     const mouseLeave = () => {
@@ -48,19 +48,19 @@ const Header = () => {
 
     const mouseEnter = () => {
         setSearch(true);
+
     }
 
     const handleViewStundent = (data, title) => {
-      
         const dataSend = {
             data: data,
             img: data.photo,
             name: data.fullname,
             sede: title,
         }
-        //crear variable global
         sessionStorage.setItem('data_stundent', JSON.stringify(dataSend));
-        navigate('/profile');
+        navigate('/profile')
+        navigate(0)
     };
 
     return (
@@ -79,8 +79,8 @@ const Header = () => {
                             {
                                 _data.map( (element, index) => (
                                     <a key={index} onClick={() => { handleViewStundent(element , element.homeroom)}} className='photoa'>
-                                         <div className='phoyo'>
-                                            <img src={element.photo} alt='_' />
+                                         <div className='phoyo'>  
+                                                <img src={element.photo} alt='_' />
                                          </div>
                                         <h1>{element.fullname}</h1>
                                     </a>

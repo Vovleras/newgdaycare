@@ -22,6 +22,7 @@ const CardStudentList = ({
         //crear variable global
         sessionStorage.setItem('data_stundent', JSON.stringify(data));
         navigate('/profile');
+        console.log(data)
 
     };
 

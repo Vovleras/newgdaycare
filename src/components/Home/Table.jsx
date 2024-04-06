@@ -17,7 +17,7 @@ const Table = ({
             setDataCell(data_cell)
         }
     },[data_, data_header])
-
+    console.log(data_)
     return (
         <>
            <table>

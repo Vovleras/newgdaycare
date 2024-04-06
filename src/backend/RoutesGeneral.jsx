@@ -10,6 +10,7 @@ if (!data_section && !regex.test(data_section)) {
   console.log('No se ha cargado la información de los estudiantes');
 }
 
+
 /**
  * Get Data courses
  * @returns [{}]
