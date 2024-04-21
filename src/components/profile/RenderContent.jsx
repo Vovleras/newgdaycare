@@ -3,6 +3,7 @@ import {
     Typography , 
     Button 
 } from '@mui/material';
+import {useLocation} from 'react-router-dom';
 
 
 /**
@@ -11,9 +12,12 @@ import {
 */
 const RenderContent = ({
     data_content,
+    
 }) =>  {
 
+    const location = useLocation();
     //hooks
+    
     const [ data , setData ] = React.useState({
             first_part: [
                 {
@@ -39,7 +43,7 @@ const RenderContent = ({
 
 
     const converAllOneObject = (_data) => {
-    
+        
         return _data?.reduce( (acc,element,index) => {
             return {
                 ...acc,
@@ -49,7 +53,9 @@ const RenderContent = ({
 
     }
 
+
     const converAllOneObject2 = (_data, data_filtrada) => {
+        
         const data = _data?.reduce( (acc,element,index) => {
             if (index < (data_filtrada.length / 2)) {
                 acc.first_part.push(element);
@@ -62,19 +68,25 @@ const RenderContent = ({
             first_part: [],
             second_part: [],
         });
+       
+        
 
+        console.log("data antes react useEffect",{data})
         return data;
+       
+
     }
 
 
    React.useEffect(() => {
 
         const data = window.sessionStorage.getItem('data_stundent');
-
+        console.log({data})
         if (window.sessionStorage.hasOwnProperty('data_stundent')) {
 
             let data_ = Object.entries((JSON.parse(data)).data);
-
+            
+            console.log("data dentro if:",{data_})
             let data_filtrada = data_?.map( (element,index) => {
                 
                 const text_ = (element[0]).replace(/_/g, ' ');
@@ -94,7 +106,7 @@ const RenderContent = ({
             const first_part_array = converAllOneObject2(data_partidad.first_part, data_partidad.first_part);
             const second_part_array = converAllOneObject2(data_partidad.second_part, data_partidad.second_part);
         
-            
+
             setData({
                 first_part: [converAllOneObject(first_part_array.first_part), 
                              converAllOneObject(first_part_array.second_part)],
@@ -106,7 +118,7 @@ const RenderContent = ({
 
         }
 
-   }, []);
+   }, [location]);
 
 
   //render
@@ -141,6 +153,7 @@ const RenderContent = ({
                                                           (element[1] !== undefined)? String(element[1]) : ''
                                                         }
                                                     </Typography>
+
                                                 </div>
                                             ))
                                         }

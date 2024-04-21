@@ -1,22 +1,26 @@
 //import libs
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+
+
+
 
 //import components
 const Header = () => {
 
-    const [ _data , setData ] = React.useState([]);
-    const [isSearch , setSearch ] = React.useState(false);
-    
+    const [ _data , setData ] = useState([]);
+    const [isSearch , setSearch ] = useState(false);
     const navigate = useNavigate();
 
     const onChange = (e) => {
+        
         const data = JSON.parse(sessionStorage.getItem('data'))[0];
         const data2 = JSON.parse(sessionStorage.getItem('data'))[1];
+        
         //juntar los dos arrays en uno solo
         const data_ = [...data, ...data2];
-
+        
         //console.log('data', data);
 
         const find = data_.filter( (element) => {
@@ -36,12 +40,10 @@ const Header = () => {
         if (e.target.value === '') {
             setSearch(false);
             return;
-        }
+        }   
         setSearch(true);
-        setData(find); 
-        
+        setData(find);    
     }
-
     const mouseLeave = () => {
         setSearch(false);
     }
@@ -50,19 +52,17 @@ const Header = () => {
         setSearch(true);
 
     }
-
     const handleViewStundent = (data, title) => {
-        const dataSend = {
+        const dataSend = { 
             data: data,
             img: data.photo,
             name: data.fullname,
             sede: title,
         }
         sessionStorage.setItem('data_stundent', JSON.stringify(dataSend));
-        navigate('/profile')
-        navigate(0)
+        navigate('/profile', {state: dataSend}); //location
+        
     };
-
     return (
         <>
             <div style={{height: '4em'}} />
@@ -78,7 +78,8 @@ const Header = () => {
                         <div className='_result_search'>
                             {
                                 _data.map( (element, index) => (
-                                    <a key={index} onClick={() => { handleViewStundent(element , element.homeroom)}} className='photoa'>
+                                    <a key={index} onClick={() => { handleViewStundent(element , element.homeroom)}} 
+                                        className='photoa'>
                                          <div className='phoyo'>  
                                                 <img src={element.photo} alt='_' />
                                          </div>

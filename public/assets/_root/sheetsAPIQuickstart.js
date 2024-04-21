@@ -145,6 +145,7 @@ function sheetValuesToObject(sheetValues, headers) {
     let people = null;
     if (sheetValues) people = headers ? sheetValues : sheetValues.slice(1);
     const peopleWithHeadings = addHeadings(people, headings);
+    console.log({peopleWithHeadings})
     return peopleWithHeadings;
 }
 
@@ -172,9 +173,10 @@ async function listMajors() {
 
   const range = response.result;
   const range2 = response2.result;
-
+  console.log(sheetValuesToObject(range.values)),
    window.sessionStorage.setItem('token', true);
    window.sessionStorage.setItem('data', JSON.stringify([
+    
     sheetValuesToObject(range.values),
     sheetValuesToObject(range2.values)
   ]));

@@ -1,6 +1,8 @@
 //import libraries
 import React from 'react';
 import RenderContent from './RenderContent';
+import {useLocation} from 'react-router-dom';
+
 
 //import components
 const RenderProfile = ({
@@ -10,7 +12,7 @@ const RenderProfile = ({
     cursosAsignados,
 }) => {
 
-
+    const location = useLocation();
     const [data, setData] = React.useState({
         sedePerteneciente: '',
         img_profile:  '',
@@ -19,7 +21,6 @@ const RenderProfile = ({
         aprovadeUser: ['No Have Pickavd']
         
     });
-    //console.log ([data, setData])
     let img_Course = '';
     const imgIndex = {
         '1': 'Jellyfish',
@@ -44,6 +45,7 @@ const RenderProfile = ({
             nombreUsuario: (nombreUsuario).toLowerCase(),
             cursosAsignados: cursosAsignados,
         });
+       
 
     },
     [ sedePerteneciente, 
@@ -55,7 +57,7 @@ const RenderProfile = ({
     React.useEffect(() => {
         
         const data = window.sessionStorage.getItem('data_stundent');
-    
+
         if (window.sessionStorage.hasOwnProperty('data_stundent')) {
             let data_ = JSON.parse(data);
             let pickavd  = ['No Have Pickavd']
@@ -67,20 +69,19 @@ const RenderProfile = ({
                    pickavd = ['No Have Pickavd']
                 }
             }
-
             setData({
                 sedePerteneciente: (data_.sede).slice(0, 3),
                 img_profile:  data_.img,
                 nombreUsuario: data_.name,
                 cursosAsignados: (data_.sede).slice(4, data_.sede.length),
-                aprovadeUser: pickavd
+                aprovadeUser: pickavd,
             });
         }
 
         //scroll to top
         window.scrollTo(0, 0);
 
-    }, []);
+    }, [location]);
 
     //render
     return (
