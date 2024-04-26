@@ -60,7 +60,7 @@ const Header = () => {
             sede: title,
         }
         sessionStorage.setItem('data_stundent', JSON.stringify(dataSend));
-        navigate('/profile', {state: dataSend}); //location
+        window.location.href = '/profile';  //location
         
     };
     return (
